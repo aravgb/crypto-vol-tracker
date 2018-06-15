@@ -37,6 +37,15 @@
   padding: 10px 0;
 }
 
+.ticker-table th a {
+  text-decoration: underline;
+}
+
+.ticker-table th a:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+
 .ticker-table td {
   text-align: left;
   padding-right: 30px;
