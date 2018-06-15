@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
 import tickers from "./tickers.json";
@@ -50,7 +49,7 @@ class App extends Component {
     const rows = this.getData().map((t, i) => this.renderTicker(t, i));
 
     return (
-      <table className="ticker-table">
+      <table className="ticker-table" cell-spacing="0">
         <thead>
           <tr>
             <th>Ticker</th>
@@ -68,7 +67,6 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Crypto Vol Ranker</h1>
         </header>
         {this.renderTickers()}

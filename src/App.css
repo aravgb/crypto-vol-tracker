@@ -2,20 +2,12 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40px;
-}
-
 .App-header {
-  background-color: #222;
-  height: 100px;
-  padding: 20px;
-  color: white;
+  color: #111;
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 2.5em;
 }
 
 .App-intro {
@@ -28,13 +20,17 @@
 }
 
 .ticker-table {
-  margin: 0 auto;
-  padding-left: 30px;
+  margin: 5px auto;
+  border-spacing: 0;
+}
+
+.ticker-table thead {
+  background: #ccc;
 }
 
 .ticker-table th {
   text-align: left;
-  padding: 10px 0;
+  padding: 10px;
 }
 
 .ticker-table th a {
@@ -48,5 +44,5 @@
 
 .ticker-table td {
   text-align: left;
-  padding-right: 30px;
+  padding: 5px 10px;
 }
