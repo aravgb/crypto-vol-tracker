@@ -20,10 +20,10 @@ class App extends Component {
     );
 
     return (
-      <table>
+      <table className="ticker-table">
         <thead>
-          <td>Ticker</td>
-          <td>Volume</td>
+          <th>Ticker</th>
+          <th>Volume</th>
         </thead>
         <tbody>{rows}</tbody>
       </table>
