@@ -9,7 +9,12 @@ class App extends Component {
     return (
       <tr key={i}>
         <td>{t.name}</td>
-        <td>{t.quotes.USD.volume_24h}</td>
+        <td>
+          ${t.quotes.USD.volume_24h.toLocaleString({
+            style: "currency",
+            currency: "USD"
+          })}
+        </td>
       </tr>
     );
   }
@@ -23,7 +28,7 @@ class App extends Component {
       <table className="ticker-table">
         <thead>
           <th>Ticker</th>
-          <th>Volume</th>
+          <th>Volume (24h)</th>
         </thead>
         <tbody>{rows}</tbody>
       </table>
