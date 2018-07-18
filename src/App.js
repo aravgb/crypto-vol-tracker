@@ -52,7 +52,7 @@ class App extends Component {
       <table className="ticker-table" cell-spacing="0">
         <thead>
           <tr>
-            <th>Ticker</th>
+            <th>Tickers</th>
             <th>
               <a onClick={this.toggleSort.bind(this)}>Volume (24h)</a>
             </th>
