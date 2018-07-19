@@ -5,7 +5,15 @@ jobs:
       - image: circleci/node:8.11
     working_directory: ~/repo
     steps:
-       - checkout
-       - yarn install
-       - yarn test
-       - yarn run build
+        - checkout
+        - run: yarn install
+        - run: yarn test
+        - run:
+            command: |
+              wget -qO- https://cli.netlify.com/download/latest/linux | tar xvz
+        - deploy:
+            command: |
+              if [ "${CIRCLE_BRANCH}" == "test1" ]; then
+                yarn run build
+                ./netlifyctl deploy --access-token=$NETLIFY_AUTH_TOKEN --site-id=$NETLIFY_SITE_ID_STAGING --publish-directory=build
+              fi
