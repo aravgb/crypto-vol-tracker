@@ -45,10 +45,11 @@ workflows:
             tags:
               only: /.*/
       - deploy-stage:
-          branches:
-              only: master
           requires:
             - build
+          filters:
+            branches:
+                only: master
       - deploy-prod:
           requires:
             - build
