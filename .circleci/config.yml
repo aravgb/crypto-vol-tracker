@@ -38,8 +38,13 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build
+      - build:
+          filters:
+            tags:
+              only: /.*/
       - deploy-stage:
+          branches:
+              only: master
           requires:
             - build
       - deploy-prod:
