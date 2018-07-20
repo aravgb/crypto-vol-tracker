@@ -1,0 +1,52 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.11
+    working_directory: ~/repo
+    steps:
+        - checkout
+        - run: yarn install
+        - run: yarn test
+        - restore_cache:
+            key: netlifyctl
+        - run:
+            command: |
+              test -e netlifyctl && wget -qO- https://cli.netlify.com/download/latest/linux | tar xvz
+        - save_cache:
+            key: netlifyctl
+            paths:
+              - netlifyctl
+  deploy-stage:
+    docker:
+      - image: circleci/node:8.11
+    steps:
+        - checkout
+        - run:
+            command: |
+              if [ "${CIRCLE_BRANCH}" == "test1" ]; then
+                yarn run build
+                ./netlifyctl deploy --access-token=$NETLIFY_AUTH_TOKEN --site-id=$NETLIFY_SITE_ID_STAGING --publish-directory=build
+              fi
+  deploy-prod:
+    docker:
+      - image: circleci/node:8.11
+    steps:
+      - checkout
+      - run: echo "noop"
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy-stage:
+          requires:
+            - build
+      - deploy-prod:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+            tags:
+              only: /^production.*/
