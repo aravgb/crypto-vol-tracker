@@ -17,10 +17,27 @@ jobs:
             key: netlifyctl
             paths:
               - netlifyctl
+  deploy-stage:
         - deploy:
             command: |
               if [ "${CIRCLE_BRANCH}" == "test1" ]; then
                 yarn run build
                 ./netlifyctl deploy --access-token=$NETLIFY_AUTH_TOKEN --site-id=$NETLIFY_SITE_ID_STAGING --publish-directory=build
               fi
-
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy-stage:
+        requires:
+          - build
+        filters:
+          branches:
+            only: test1
+      - deploy-prod:
+        requires:
+          - build
+        filters:
+          tags:
+            only: production.*
